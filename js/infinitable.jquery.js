@@ -66,7 +66,7 @@
 		// add input box
 		if(cell.find('input').size() == 0) {
 			var text = cell.text();
-			cell.empty().append($('<input type="text">').val(text));
+			cell.empty().append($('<input type="text">').attr('maxlength', 1).val(text));
 		}
 	}
 
