@@ -9,6 +9,7 @@ var keyCode = {
 
 $(function() {
 	$('#main').infiniTable();
+	$('#main input:first').focus();
 
 	$('#main').on('keyup', function(e) {
 		e.preventDefault();
@@ -24,6 +25,7 @@ $(function() {
 				target.y = Math.max(0, coords.y - 1);
 				break;
 
+			case keyCode.RETURN:
 			case keyCode.DOWN:
 				target.y = Math.min($('#main').data('rows') - 1, coords.y + 1);
 				break;
