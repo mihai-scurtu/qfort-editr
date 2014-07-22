@@ -35,7 +35,8 @@ input {
 
 #main td input {
 	margin: 0;
-	max-width: 1em;
+	width: 1.5em;
+	height: 1.5em;
 	text-align: center;
 	font-size: 28px;
 }
