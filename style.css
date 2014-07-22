@@ -41,5 +41,6 @@ input {
 }
 
 #main td input:focus {
-	outline: 1px solid #bbb; /*rgba(0, 0, 0, .3);*/
+	outline: none; 
+	background-color: #fafafa;
 }
