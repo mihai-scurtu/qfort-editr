@@ -2,6 +2,21 @@ body {
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
+input {
+	font-family: "Lucida Console", Monaco, monospace;
+	border: 0;
+	font-size: 17px;
+}
+
+.table-wrapper {
+	float: left;
+	min-width: 200px;
+}
+
+#comment {
+	width: 100%;
+}
+
 #main {
 	border-spacing: 0;
 	border-collapse: collapse;
@@ -20,9 +35,7 @@ body {
 
 #main td input {
 	margin: 0;
-	border: 0;
 	max-width: 1em;
 	text-align: center;
-	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 28px;
 }

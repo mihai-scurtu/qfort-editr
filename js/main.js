@@ -45,6 +45,18 @@ $(function() {
 		$('#main').data('cells')[target.x][target.y].find('input').focus();
 		return false;
 	});
+
+	$('#comment').on('change focus keyup', function(e) {
+		var val = $(this).val();
+
+		if(!val || val.charAt(0) != '#') {
+			$(this).val('#' + val);
+		}
+
+		if(e.which == keyCode.RETURN) {
+			$(this).blur();
+		}
+	});
 });
 
 
