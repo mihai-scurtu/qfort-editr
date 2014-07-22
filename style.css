@@ -12,6 +12,12 @@ input:focus {
 	outline: none; 
 }
 
+button {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 17px;
+	padding: 5px 10px;
+}
+
 .table-wrapper {
 	float: left;
 	min-width: 200px;
@@ -19,6 +25,10 @@ input:focus {
 
 #comment {
 	width: 100%;
+}
+
+.download-btn {
+	margin-top: 20px;
 }
 
 #main {
