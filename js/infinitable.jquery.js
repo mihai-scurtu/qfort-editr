@@ -10,7 +10,7 @@
 		_this.on('focus', 'input', function(e) {
 			console.log(_this.data(), $(this).parent().data());
 
-			if($(this).parent().data('x') == _this.data('cells') - 1) {
+			if($(this).parent().data('x') == _this.data('cols') - 1) {
 				expandTable(_this, 'x');
 			}
 
@@ -38,9 +38,9 @@
 		// save table size
 		table.data({
 			rows: table.find('tr').size(),
-			cells: table.find('tr:first').find('td').size()
+			cols: table.find('tr:first').find('td').size(),
+			cells: [[]]
 		});
-
 
 		// init cells
 		$.each(rows, function(i){
@@ -79,16 +79,16 @@
 	 *                    undefined => add both
 	 */
 	var expandTable = function(table, dir) {
-		var newCells = table.data('cells');
+		var newCols = table.data('cols');
 		var newRows = table.data('rows');
 
 		if(dir == 'x' || dir === undefined) {
-			newCells += 1;
+			newCols += 1;
 
 			// add a new cell to each row
 			table.find('tr').each(function(i) {
 				var cell = $('<td>');
-				initCell(cell, newCells - 1, i);
+				initCell(cell, newCols - 1, i);
 
 				$(this).append(cell);
 			});
@@ -100,7 +100,7 @@
 			// create a new row
 			var row = $('<tr>');
 
-			for(i = 0; i < newCells; i++) {
+			for(i = 0; i < newCols; i++) {
 				var cell = $('<td>');
 				initCell(cell, i, newRows - 1); 
 
@@ -112,7 +112,7 @@
 
 		// update table size
 		table.data({
-			cells: newCells,
+			cols: newCols,
 			rows: newRows
 		});
 	}
