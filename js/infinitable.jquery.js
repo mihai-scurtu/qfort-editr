@@ -8,7 +8,7 @@
 		init(_this);
 
 		_this.on('focus', 'input', function(e) {
-			console.log(_this.data(), $(this).parent().data());
+			// console.log(_this.data(), $(this).parent().data());
 
 			if($(this).parent().data('x') == _this.data('cols') - 1) {
 				expandTable(_this, 'x');
@@ -39,7 +39,7 @@
 		table.data({
 			rows: table.find('tr').size(),
 			cols: table.find('tr:first').find('td').size(),
-			cells: [[]]
+			cells: []
 		});
 
 		// init cells
@@ -71,6 +71,12 @@
 		}
 
 		if(table.data && table.data('cells')) {
+			// initialize a new array row if needed
+			if(!table.data('cells')[x]) {
+				table.data('cells')[x] = []
+			}
+
+			// register cell
 			table.data('cells')[x][y] = cell;
 		}
 	}
