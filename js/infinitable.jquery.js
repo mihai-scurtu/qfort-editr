@@ -70,11 +70,19 @@
 		}
 	}
 
+	/**
+	 * Expands the table in a direction (or both), initializing each new cell
+	 * @param  {$} table The table jquery object
+	 * @param  {'x'|'y'|undefined} dir   The direction to expand:
+	 *                    'x' => add new column
+	 *                    'y' => add new row
+	 *                    undefined => add both
+	 */
 	var expandTable = function(table, dir) {
 		var newCells = table.data('cells');
 		var newRows = table.data('rows');
 
-		if(dir == 'x') {
+		if(dir == 'x' || dir === undefined) {
 			newCells += 1;
 
 			// add a new cell to each row
@@ -86,7 +94,7 @@
 			});
 		}
 
-		if(dir == 'y') {
+		if(dir == 'y' || dir === undefined) {
 			newRows += 1;
 
 			// create a new row
