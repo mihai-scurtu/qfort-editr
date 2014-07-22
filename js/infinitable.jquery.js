@@ -45,18 +45,19 @@
 		// init cells
 		$.each(rows, function(i){
 			$.each($(this).find('td'), function(j) {
-				initCell($(this), j, i);
+				initCell(table, $(this), j, i);
 			});
 		});
 	}
 
 	/**
 	 * Initialize a cell
+	 * @param  {$} table The table juery object
 	 * @param  {$} cell The cell jqery object
 	 * @param  {int} x    The cell's x coordinate
 	 * @param  {int} y    The cell's y coordinate
 	 */
-	var initCell = function(cell, x, y) {
+	var initCell = function(table, cell, x, y) {
 		// add coords
 		cell.data({
 			x: x,
@@ -67,6 +68,10 @@
 		if(cell.find('input').size() == 0) {
 			var text = cell.text();
 			cell.empty().append($('<input type="text">').attr('maxlength', 1).val(text));
+		}
+
+		if(table.data && table.data('cells')) {
+			table.data('cells')[x][y] = cell;
 		}
 	}
 
@@ -88,7 +93,7 @@
 			// add a new cell to each row
 			table.find('tr').each(function(i) {
 				var cell = $('<td>');
-				initCell(cell, newCols - 1, i);
+				initCell(table, cell, newCols - 1, i);
 
 				$(this).append(cell);
 			});
@@ -102,7 +107,7 @@
 
 			for(i = 0; i < newCols; i++) {
 				var cell = $('<td>');
-				initCell(cell, i, newRows - 1); 
+				initCell(table, cell, i, newRows - 1); 
 
 				row.append(cell);
 			}
