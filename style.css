@@ -25,7 +25,7 @@ input {
 #main td {
 	margin: 0;
 	padding: 0;
-	border: 1px #888 dashed;
+	border: 1px #777 dashed;
 }
 
 /*#main td:first-child { border-left: 0; }
@@ -38,4 +38,8 @@ input {
 	max-width: 1em;
 	text-align: center;
 	font-size: 28px;
+}
+
+#main td input:focus {
+	outline: 1px solid #bbb; /*rgba(0, 0, 0, .3);*/
 }
