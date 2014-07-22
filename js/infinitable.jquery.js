@@ -7,8 +7,11 @@
 
 		init(_this);
 
-		_this.on('focus', 'input', function(e) {
+		_this.on('focus click', 'input', function(e) {
 			// console.log(_this.data(), $(this).parent().data());
+
+			// select input content
+			this.select();
 
 			if($(this).parent().data('x') == _this.data('cols') - 1) {
 				expandTable(_this, 'x');
