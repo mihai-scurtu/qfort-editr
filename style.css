@@ -8,6 +8,10 @@ input {
 	font-size: 17px;
 }
 
+input:focus {
+	outline: none; 
+}
+
 .table-wrapper {
 	float: left;
 	min-width: 200px;
@@ -42,6 +46,5 @@ input {
 }
 
 #main td input:focus {
-	outline: none; 
 	background-color: #fafafa;
 }
