@@ -9,4 +9,4 @@ This is a utility for creating [Quickfort](http://www.joelpt.net/quickfort/) blu
 
 Use the top input to update the comment. Use the arrow keys to navigate the pseudo-spreadsheet, and click export to receive a CSV blueprint.
 
-The utility is in a very early state, but I plan on adding a bunch of features.
+The editor is in a very early state, but I plan on adding a bunch of features.
