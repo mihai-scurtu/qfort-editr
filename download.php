@@ -15,7 +15,7 @@ if(is_array($_POST['data'])) {
 		header('Content-type: text/csv');
 		header('Content-Disposition: attachment; filename="'.$filename.'"');
 
-		echo $_POST['comment'].PHP_EOL.array2csv($data);
+		echo $comment.PHP_EOL.array2csv($data);
 	}
 }
 
