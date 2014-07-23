@@ -1,9 +1,7 @@
 <?php 
 function array_trim($arr) {
-	dump_array($arr);
-
-	$max_x = count($arr[0]);
-	$max_y = count($arr);
+	$max_x = count($arr);
+	$max_y = count($arr[0]);
 
 	// trim empty rows
 	for($i = $max_x - 1; $i >= 0; $i--) {
@@ -14,7 +12,6 @@ function array_trim($arr) {
 	}
 
 	$arr = array_slice($arr, 0, $max_y);
-	dump_array($arr);
 
 	for($i = $max_y - 1; $i >= 0; $i--) {
 		for($j = 0; $j < $max_x; $j++) {
@@ -26,10 +23,10 @@ function array_trim($arr) {
 	}
 
 	for($i = $max_y - 1; $i >= 0; $i--) {
-		$arr[$i] = array_slice($arr, 0, $max_x);
+		$arr[$i] = array_slice($arr[$i], 0, $max_x);
 	}
 
-	dump_array($arr);
+	return $arr;
 }
 
 function dump_array($arr) {
