@@ -1,5 +1,7 @@
 <?php 
 function array_trim($arr) {
+	dump_array($arr);
+
 	$max_x = count($arr[0]);
 	$max_y = count($arr);
 
@@ -12,6 +14,7 @@ function array_trim($arr) {
 	}
 
 	$arr = array_slice($arr, 0, $max_x);
+	dump_array($arr);
 
 	for($i = $max_x - 1; $i >= 0; $i--) {
 		for($j = 0; $j < $max_y; $j++) {
@@ -26,7 +29,21 @@ function array_trim($arr) {
 		$arr[$i] = array_slice($arr, 0, $max_y);
 	}
 
-	var_dump($arr);
+	dump_array($arr);
+}
+
+function dump_array($arr) {
+	echo '<pre>';
+
+	for($i = 0; $i < count($arr); $i++) {
+		for($j = 0; $j < count($arr[$i]); $j++) {
+			echo '"'.$arr[$i][$j].'" ';
+		}
+
+		echo PHP_EOL;
+	}
+
+	echo '</pre>';
 }
 
 ?>
