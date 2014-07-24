@@ -48,7 +48,7 @@ function array2csv($arr) {
 	
 	for($i = 0; $i < count($arr); $i++) {
 		for($j = 0; $j < count($arr[$i]); $j++) {
-			echo '"'.$arr[$i][$j].'",';
+			echo ($j ? ',' : '').'"'.$arr[$i][$j].'"';
 		}
 
 		echo PHP_EOL;
