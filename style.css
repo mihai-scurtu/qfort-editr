@@ -26,20 +26,25 @@ button {
 
 .table-wrapper {
 	float: left;
-	min-width: 200px;
+	/*min-width: 200px;*/
+	width: 100%;
+	text-align: center;
 }
 
 #comment {
 	width: 100%;
+	text-align: center;
 }
 
 .download-btn {
 	margin-top: 20px;
+	margin-left: 20px;
 }
 
 #main {
 	border-spacing: 0;
 	border-collapse: collapse;
+	margin: 0 auto;
 }
 
 #main td {
