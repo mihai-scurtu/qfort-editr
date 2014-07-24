@@ -35,6 +35,15 @@ input:focus {
 #main td.highlight input {
 	background-color: #fcfcfc;
 }
+
+#main tr.guide td, #main td.guide {
+	border: none;
+	padding: 3px;
+	text-align: center;
+	color: #999;
+	font-weight: bold;
+}
+
 /*#main td:first-child { border-left: 0; }
 #main td:last-child { border-right: 0; }
 #main tr:first-child td { border-top: 0; }
