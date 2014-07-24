@@ -80,9 +80,18 @@ $(function() {
 			$(this).val('#' + val);
 		}
 
+		
 		if(e.which == keyCode.RETURN) {
 			$(this).blur();
 		}
+	});
+
+	$('#comment').on('blur', function(e) {
+		// remove empty hash
+		if($(this).val() == '#') {
+			$(this).val('');
+		}
+
 	});
 });
 
