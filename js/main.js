@@ -11,6 +11,7 @@ $(function() {
 	$('#main').infiniTable();
 	$('#main input:first').focus();
 
+	// keyboard navigation
 	$('#main').on('keyup', function(e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -46,6 +47,32 @@ $(function() {
 		return false;
 	});
 
+	$('#main').on('focus', 'input', function(e) {
+		var coords = getCoords($(this));
+		var cells = $('#main').data('cells');
+
+		$('#main').find('td').removeClass('highlight');
+
+		if(cells && cells.length && cells[0].length) {
+			var i, cell;
+
+			for(i = 0; i < $('#main').data('cols'); i++) {
+				if(cell = cells[i][coords.y]) {
+					cell.addClass('highlight');
+				}
+			}
+			
+			for(i = 0; i < $('#main').data('rows'); i++) {
+				if(cell = cells[coords.x][i]) {
+					cell.addClass('highlight');
+				}
+			}
+
+			cells[coords.x][coords.y].removeClass('highlight');
+		}
+	});
+
+	// always prepend "#" to comment field
 	$('#comment').on('change focus keyup', function(e) {
 		var val = $(this).val();
 

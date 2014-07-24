@@ -32,6 +32,9 @@ input:focus {
 	border: 1px #777 dashed;
 }
 
+#main td.highlight input {
+	background-color: #fcfcfc;
+}
 /*#main td:first-child { border-left: 0; }
 #main td:last-child { border-right: 0; }
 #main tr:first-child td { border-top: 0; }
