@@ -72,6 +72,11 @@ $(function() {
 		}
 	});
 
+	// update comment addon
+	$('#keyword').change(function() {
+		$('#comment').parent().find('.input-group-addon').text($(this).val());
+	});
+
 	// always prepend "#" to comment field
 	// $('#comment').on('change focus keyup', function(e) {
 	// 	var val = $(this).val();
