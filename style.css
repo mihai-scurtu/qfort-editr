@@ -28,7 +28,6 @@ button {
 }
 
 .btn-download {
-	margin-top: 20px;
 	margin-left: 20px;
 }
 
@@ -43,6 +42,9 @@ button {
 	margin: 0;
 	padding: 0;
 	border: 1px #777 dashed;
+}
+#main td input {
+	border: none;
 }
 #main td.highlight input {
 	background-color: #fcfcfc;
@@ -74,4 +76,6 @@ button {
 #toolbar {
 	/*width: 34px;
 	position: fixed;*/
+
+	margin: 5px auto;
 }
