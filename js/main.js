@@ -73,18 +73,18 @@ $(function() {
 	});
 
 	// always prepend "#" to comment field
-	$('#comment').on('change focus keyup', function(e) {
-		var val = $(this).val();
+	// $('#comment').on('change focus keyup', function(e) {
+	// 	var val = $(this).val();
 
-		if(!val || val.charAt(0) != '#') {
-			$(this).val('#' + val);
-		}
+	// 	if(!val || val.charAt(0) != '#') {
+	// 		$(this).val('#' + val);
+	// 	}
 
 		
-		if(e.which == keyCode.RETURN) {
-			$(this).blur();
-		}
-	});
+	// 	if(e.which == keyCode.RETURN) {
+	// 		$(this).blur();
+	// 	}
+	// });
 
 	$('#comment').on('blur', function(e) {
 		// remove empty hash
