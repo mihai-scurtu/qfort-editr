@@ -1,29 +1,29 @@
 <?php 
 function array_trim($arr) {
-	$max_x = count($arr);
-	$max_y = count($arr[0]);
+	$max_rows = count($arr);
+	$max_cols = count($arr[0]);
 
 	// trim empty rows
-	for($i = $max_x - 1; $i >= 0; $i--) {
+	for($i = $max_rows - 1; $i >= 0; $i--) {
 		if(count(array_filter($arr[$i]))) {
-			$max_y = $i + 1;
+			$max_rows = $i + 1;
 			break;
 		}
 	}
 
-	$arr = array_slice($arr, 0, $max_y);
+	$arr = array_slice($arr, 0, $max_rows);
 
-	for($i = $max_y - 1; $i >= 0; $i--) {
-		for($j = 0; $j < $max_x; $j++) {
-			if($arr[$i][$j] !== '') {
-				$max_x = $i + 1;
+	for($i = $max_cols - 1; $i >= 0; $i--) {
+		for($j = 0; $j < $max_rows; $j++) {
+			if($arr[$j][$i] !== '') {
+				$max_cols = $i + 1;
 				break(2);
 			}
 		}
 	}
 
-	for($i = $max_y - 1; $i >= 0; $i--) {
-		$arr[$i] = array_slice($arr[$i], 0, $max_x);
+	for($i = $max_rows - 1; $i >= 0; $i--) {
+		$arr[$i] = array_slice($arr[$i], 0, $max_cols);
 	}
 
 	return $arr;
