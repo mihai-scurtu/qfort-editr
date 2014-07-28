@@ -4,18 +4,18 @@ require_once 'functions.php';
 if(is_array($_POST['data'])) {
 	$data = array_trim($_POST['data']);
 
-	if($_POST['comment'] == '#') {
-		$_POST['comment'] = false;
-	}
+	$keyword = $_POST['keyword'];
+	$comment = $_POST['comment'];
 
-	$comment = $_POST['comment'] ? $_POST['comment'] : '#qfort-editr-blueprint';
-	$filename = str_replace(array('#', ' '), array('', '-'), $comment).'.csv';
+	// var_dump($keyword); die;
+
+	$filename = preg_replace('/[^a-zA-Z0-9\-]+/', '-', $comment.$keyword).'.csv';
 
 	if(count($data)) {
 		header('Content-type: text/csv');
 		header('Content-Disposition: attachment; filename="'.$filename.'"');
 
-		echo $comment.PHP_EOL.array2csv($data);
+		echo $keyword.' '.$comment.PHP_EOL.array2csv($data);
 	}
 }
 
