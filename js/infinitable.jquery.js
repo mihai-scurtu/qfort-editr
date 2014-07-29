@@ -1,69 +1,130 @@
 (function($) {
-	$.fn.infiniTable = function() {
+	$.fn.infiniTable = function(method, a1, a2, a3, a4) {
 		var _this = this;
-		if(!_this.is('table')) {
-			$.error('Subject is not a table');
+
+		if(method === undefined) {
+			if(!_this.is('table')) {
+				$.error('Subject is not a table');
+			}
+
+			methods.init(_this);
+
+			_this.on('focus click', 'input', function(e) {
+				// console.log(_this.data(), $(this).parent().data());
+
+				// select input content
+				this.select();
+
+				if($(this).parent().data('x') == _this.data('cols') - 1) {
+					methods.expand(_this, 'x');
+				}
+
+				if($(this).parent().data('y') == _this.data('rows') - 1) {
+					methods.expand(_this, 'y');
+				}
+			});
+
+			return this;
+		} else {
+			if(methods[method] !== undefined) {
+				return methods[method](this, a1, a2, a3, a4)
+			}
 		}
-
-		init(_this);
-
-		_this.on('focus click', 'input', function(e) {
-			// console.log(_this.data(), $(this).parent().data());
-
-			// select input content
-			this.select();
-
-			if($(this).parent().data('x') == _this.data('cols') - 1) {
-				expandTable(_this, 'x');
-			}
-
-			if($(this).parent().data('y') == _this.data('rows') - 1) {
-				expandTable(_this, 'y');
-			}
-
-			// console.log(_this.data());
-		});
-
-		return this;
 	}	
 
-	var init = function(table) {
-		// rows cache
-		var rows = table.find('tr:not(.guide)');
 
-		// init an empty table
-		if(rows.size() == 0) {
-			table.append($('<tr>').append('<td>'));
+	var methods = {
+		init: function(table) {
+			// rows cache
+			var rows = table.find('tr:not(.guide)');
 
-			rows = table.find('tr');
-		}
+			// init an empty table
+			if(rows.size() == 0) {
+				table.append($('<tr>').append('<td>'));
 
-		// save table size
-		table.data({
-			rows: rows.size(),
-			cols: rows.eq(0).find('td').size(),
-			cells: []
-		});
-
-		// add guide row (or empty it)
-		if(table.find('tr.guide').size() == 0) {
-			table.prepend($('<tr>').addClass('guide'));
-		} else {
-			table.find('tr.guide').empty();
-		}
-
-		// generate guide row cells
-		$(table.find('tr.guide')).each(function() {
-			var i;
-			for(i = 0; i <= table.data('cols'); i++) {
-				$(this).append($('<td>').html(i ? i : '&nbsp;'));
+				rows = table.find('tr');
 			}
-		});
 
-		// init rows
-		$.each(rows, function(i){
-			initRow(table, $(this), i);
-		});
+			// save table size
+			table.data({
+				rows: rows.size(),
+				cols: rows.eq(0).find('td').size(),
+				cells: []
+			});
+
+			// add guide row (or empty it)
+			if(table.find('tr.guide').size() == 0) {
+				table.prepend($('<tr>').addClass('guide'));
+			} else {
+				table.find('tr.guide').empty();
+			}
+
+			// generate guide row cells
+			$(table.find('tr.guide')).each(function() {
+				var i;
+				for(i = 0; i <= table.data('cols'); i++) {
+					$(this).append($('<td>').html(i ? i : '&nbsp;'));
+				}
+			});
+
+			// init rows
+			$.each(rows, function(i){
+				initRow(table, $(this), i);
+			});
+		},
+
+
+		/**
+		 * Expands the table in a direction (or both), initializing each new cell
+		 * @param  {$} table The table jquery object
+		 * @param  {'x'|'y'|undefined} dir   The direction to expand:
+		 *                    'x' => add new column
+		 *                    'y' => add new row
+		 *                    undefined => add both
+		 */
+		expand: function(table, dir) {
+			var newCols = table.data('cols');
+			var newRows = table.data('rows');
+
+			if(dir == 'x' || dir === undefined) {
+				newCols += 1;
+
+				// add a new cell to each row
+				table.find('tr:not(.guide)').each(function(i) {
+					var cell = $('<td>');
+					initCell(table, cell, newCols - 1, i);
+
+					$(this).append(cell);
+				});
+
+				// generate guide row cells
+				$(table.find('tr.guide')).each(function() {
+					$(this).append($('<td>').html(newCols));
+				});
+			}
+
+			if(dir == 'y' || dir === undefined) {
+				newRows += 1;
+
+				// create a new row
+				var row = $('<tr>');
+
+				for(i = 0; i < newCols; i++) {
+					var cell = $('<td>');
+					// initCell(table, cell, i, newRows - 1); 
+					row.append(cell);
+				}
+
+				initRow(table, row, newRows - 1);
+
+				table.append(row);
+			}
+			// update table size
+			table.data({
+				cols: newCols,
+				rows: newRows
+			});
+		}
 	}
 
 	var initRow = function(table, row, y) {
@@ -113,56 +174,4 @@
 		}
 	}
 
-	/**
-	 * Expands the table in a direction (or both), initializing each new cell
-	 * @param  {$} table The table jquery object
-	 * @param  {'x'|'y'|undefined} dir   The direction to expand:
-	 *                    'x' => add new column
-	 *                    'y' => add new row
-	 *                    undefined => add both
-	 */
-	var expandTable = function(table, dir) {
-		var newCols = table.data('cols');
-		var newRows = table.data('rows');
-
-		if(dir == 'x' || dir === undefined) {
-			newCols += 1;
-
-			// add a new cell to each row
-			table.find('tr:not(.guide)').each(function(i) {
-				var cell = $('<td>');
-				initCell(table, cell, newCols - 1, i);
-
-				$(this).append(cell);
-			});
-
-			// generate guide row cells
-			$(table.find('tr.guide')).each(function() {
-				$(this).append($('<td>').html(newCols));
-			});
-		}
-
-		if(dir == 'y' || dir === undefined) {
-			newRows += 1;
-
-			// create a new row
-			var row = $('<tr>');
-
-			for(i = 0; i < newCols; i++) {
-				var cell = $('<td>');
-				// initCell(table, cell, i, newRows - 1); 
-				row.append(cell);
-			}
-
-			initRow(table, row, newRows - 1);
-
-			table.append(row);
-		}
-
-		// update table size
-		table.data({
-			cols: newCols,
-			rows: newRows
-		});
-	}
 }(jQuery));
