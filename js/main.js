@@ -19,8 +19,6 @@ $(function() {
 		var coords = getCoords($(this).find('input:focus'));
 		var target = coords;
 
-		console.log(e.which);
-
 		switch(e.which) {
 			case keyCode.UP:
 				target.y = Math.max(0, coords.y - 1);
@@ -70,6 +68,10 @@ $(function() {
 
 			cells[coords.x][coords.y].removeClass('highlight');
 		}
+	});
+
+	$('#main').on('blur', 'input', function(e) {
+		$('#main').find('td').removeClass('highlight');
 	});
 
 	// update comment addon
