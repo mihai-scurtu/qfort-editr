@@ -79,6 +79,9 @@ $(function() {
 		$('#comment').parent().find('.input-group-addon').text($(this).val());
 	});
 
+	$('.btn-download').click(function() {
+		ga('send', 'event', 'button', 'click', 'export');
+	});
 });
 
 
