@@ -218,8 +218,8 @@
 		if(cell.find('input').size() == 0) {
 			var text = cell.text();
 			cell.empty().append($('<input type="text">').attr('maxlength', 2)
-				.attr('name', 'data['+y+']['+x+']').val(text))
-				.attr('autocomplete', 'off');
+				.attr('name', 'data['+y+']['+x+']').val(text)
+				.attr('autocomplete', 'off'));
 		}
 
 		if(table.data && table.data('cells')) {
