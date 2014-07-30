@@ -19,8 +19,6 @@ $(function() {
 		var coords = getCoords($(this).find('input:focus'));
 		var target = coords;
 
-		console.log(e.which);
-
 		switch(e.which) {
 			case keyCode.UP:
 				target.y = Math.max(0, coords.y - 1);
@@ -72,31 +70,17 @@ $(function() {
 		}
 	});
 
+	$('#main').on('blur', 'input', function(e) {
+		$('#main').find('td').removeClass('highlight');
+	});
+
 	// update comment addon
 	$('#keyword').change(function() {
 		$('#comment').parent().find('.input-group-addon').text($(this).val());
 	});
 
-	// always prepend "#" to comment field
-	// $('#comment').on('change focus keyup', function(e) {
-	// 	var val = $(this).val();
-
-	// 	if(!val || val.charAt(0) != '#') {
-	// 		$(this).val('#' + val);
-	// 	}
-
-		
-	// 	if(e.which == keyCode.RETURN) {
-	// 		$(this).blur();
-	// 	}
-	// });
-
-	$('#comment').on('blur', function(e) {
-		// remove empty hash
-		if($(this).val() == '#') {
-			$(this).val('');
-		}
-
+	$('.btn-download').click(function() {
+		ga('send', 'event', 'button', 'click', 'export');
 	});
 });
 

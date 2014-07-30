@@ -86,7 +86,7 @@
 			var newCols = table.data('cols');
 			var newRows = table.data('rows');
 
-			if(dir == 'x' || dir === undefined) {
+			if(dir == 'x' || !dir) {
 				newCols += 1;
 
 				// add a new cell to each row
@@ -103,7 +103,7 @@
 				});
 			}
 
-			if(dir == 'y' || dir === undefined) {
+			if(dir == 'y' || !dir) {
 				newRows += 1;
 
 				// create a new row
@@ -124,6 +124,65 @@
 				cols: newCols,
 				rows: newRows
 			});
+		},
+
+		/**
+		 * Removes a row or or a column (or both) from the end of the table
+		 * @param  {$} table The table jquery object
+		 * @param  {'x'|'y'|undefined} dir   The direction to truncate:
+		 *                    'x' => remove column
+		 *                    'y' => remove row
+		 *                    undefined => remove both
+		 */
+		truncate: function(table, dir) {
+			var newRows = table.data('rows');
+			var newCols = table.data('cols');
+			var cells = table.data('cells');
+
+			methods.truncateDOM(table, dir);
+
+			if((dir == 'y' || !dir) && newRows > 1) {
+				newRows -= 1;
+				cells.splice(newRows, 1);
+			}
+
+			if((dir == 'x' || !dir) && newCols > 1) {
+				newCols -= 1;
+
+				// unregister cells
+				table.find('tr:not(.guide)').each(function(i) {
+					cells[i].splice(newCols, 1);
+				});
+			}
+
+			// update table size
+			table.data({
+				cols: newCols,
+				rows: newRows,
+				cells: cells
+			});
+		},
+
+
+		/**
+		 * Removes a row or or a column (or both) from the end of the table (DOM only, doesn't unregister the cells)
+		 * @param  {$} table The table jquery object
+		 * @param  {'x'|'y'|undefined} dir   The direction to truncate:
+		 *                    'x' => remove column
+		 *                    'y' => remove row
+		 *                    undefined => remove both
+		 */
+		truncateDOM: function(table, dir) {
+			if((dir == 'y' || !dir) && table.find('tr:not(.guide)').size() > 1) {
+				table.find('tr:not(.guide):last').remove();
+			}
+
+			if((dir == 'x' || !dir) && table.find('tr:first td:not(.guide)').size() > 1) {
+				// include guide rows
+				table.find('tr').each(function() {
+					$(this).find('td:not(.guide):last').remove();
+				});
+			}
 		}
 	}
 
@@ -159,8 +218,8 @@
 		if(cell.find('input').size() == 0) {
 			var text = cell.text();
 			cell.empty().append($('<input type="text">').attr('maxlength', 2)
-				.attr('name', 'data['+y+']['+x+']').val(text))
-				.attr('autocomplete', 'off');
+				.attr('name', 'data['+y+']['+x+']').val(text)
+				.attr('autocomplete', 'off'));
 		}
 
 		if(table.data && table.data('cells')) {
