@@ -80,7 +80,7 @@ $(function() {
 	});
 
 	$('.btn-download').click(function() {
-		ga('send', 'event', 'button', 'click', 'export');
+		console.log(ga('send', 'event', 'button', 'click', 'export'));
 	});
 });
 
