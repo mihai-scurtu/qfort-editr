@@ -52,7 +52,9 @@
 					</tr>
 					<tr ng-repeat="row in data track by $index">
 						<td class="guide">{{$index}}</td>
-						<td ng-repeat="cell in row track by $index"><input type="text" maxlength="2" value="{{cell}}" ng-focus="focus($parent.$index, $index)" ng-model="data[$parent.$index][$index]" ng-change="update()"></td>
+						<td ng-repeat="cell in row track by $index">
+							<input type="text" maxlength="2" name="data[{{$parent.$index}}][{{$index}}]" value="{{cell}}" ng-focus="focus($parent.$index, $index)" ng-model="data[$parent.$index][$index]" ng-change="update()">
+						</td>
 					</tr>
 				</table>	
 
