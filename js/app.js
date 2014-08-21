@@ -17,11 +17,11 @@ qfortEditr.controller('DataCtrl', function($scope) {
 
 	$scope.focus = function (i, j) {
 		if(i == $scope.rows() - 1) {
-			$scope.extend('vertical');
+			$scope.extendVertically();
 		}
 
 		if(j == $scope.cols() - 1) {
-			$scope.extend('horizontal');
+			$scope.extendHorizontally();
 		}
 	}
 
@@ -29,22 +29,23 @@ qfortEditr.controller('DataCtrl', function($scope) {
 	}
 
 	$scope.extend = function(direction) {
-		if(direction == 'vertical' || direction === undefined) {
-			var row = [];
+		$scope.extendVertically();
+		$scope.extendHorizontally();
+	}
 
-			for(var i = 0; i < $scope.cols(); i++) {
-				row.push('');
-			}
+	$scope.extendVertically = function() {
+		var row = [];
 
-			$scope.data.push(row);
+		for(var i = 0; i < $scope.cols(); i++) {
+			row.push('');
 		}
 
-		if(direction == 'horizontal' || direction === undefined) {
-			for(var i = 0; i < $scope.data.length; i++) {
-				$scope.data[i].push('');
-			}
-		}
+		$scope.data.push(row);
+	}
 
-		console.log($scope.rows(), $scope.cols());
+	$scope.extendHorizontally = function() {
+		for(var i = 0; i < $scope.data.length; i++) {
+			$scope.data[i].push('');
+		}
 	}
 });
