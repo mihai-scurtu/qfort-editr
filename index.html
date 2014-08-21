@@ -25,9 +25,8 @@
 		
 		<p class="instructions center">Use the top inputs to update the keyword and the comment. Use the arrow keys to navigate the pseudo-spreadsheet (the table auto-expands), and click export to receive a CSV blueprint.</p>
 		
-		<form action="download.php" method="post" class="clearfix">
+		<form action="download.php" method="post" class="clearfix" ng-controller="DataCtrl">
 			<div class="table-wrapper">
-
 				<div class="form-inline center">
 					<div class="form-group">
 						<select name="keyword" id="keyword" class="form-control">
@@ -46,7 +45,11 @@
 				</div>
 
 				
-				<table id="main"></table>	
+				<table id="main">
+					<tr ng-repeat="row in data track by $index">
+						<td ng-repeat="cell in row track by $index"><input type="text" maxlength="2" value="{{cell}}" ng-focus="focus($parent.$index, $index)" ng-model="data[$parent.$index][$index]" ng-change="update()"></td>
+					</tr>
+				</table>	
 
 				<!-- <div id="toolbar" class="btn-group center">
 					<button class="btn btn-default btn-toolbar rotate-left">
