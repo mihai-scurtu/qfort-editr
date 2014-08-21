@@ -48,4 +48,35 @@ qfortEditr.controller('DataCtrl', function($scope) {
 			$scope.data[i].push('');
 		}
 	}
+
+	$scope.trim = function() {
+		
+	}
+
+	$scope.rotateCCW = function() {
+		while($scope.cols() < $scope.rows()) {
+			$scope.extendHorizontally();
+		}
+
+		while($scope.cols() > $scope.rows()) {
+			$scope.extendVertically();
+		}
+
+		var i, j;
+		var newData = [];
+
+		for(i = 0; i < $scope.rows(); i++) {
+			for(j = 0; j < $scope.cols(); j++) {
+				var x = $scope.cols() - 1 - j;
+				var y = i;
+
+				if(!newData[x]) {
+					newData[x] = [];
+				}
+				newData[x][y] = $scope.data[i][j];
+			}
+		}
+		
+		$scope.data = newData.slice(0);
+	}
 });
