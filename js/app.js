@@ -49,10 +49,6 @@ qfortEditr.controller('DataCtrl', function($scope) {
 		}
 	}
 
-	$scope.trim = function() {
-		
-	}
-
 	$scope.rotateCCW = function() {
 		var i, j;
 		var newData = [];
