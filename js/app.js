@@ -67,4 +67,23 @@ qfortEditr.controller('DataCtrl', function($scope) {
 		
 		$scope.data = newData.slice(0);
 	}
+
+	$scope.rotateCW = function() {
+		var i, j;
+		var newData = [];
+
+		for(i = 0; i < $scope.rows(); i++) {
+			for(j = 0; j < $scope.cols(); j++) {
+				var x = j;
+				var y = $scope.rows() - 1 - i;
+
+				if(!newData[x]) {
+					newData[x] = [];
+				}
+				newData[x][y] = $scope.data[i][j];
+			}
+		}
+		
+		$scope.data = newData.slice(0);
+	}
 });
