@@ -54,14 +54,6 @@ qfortEditr.controller('DataCtrl', function($scope) {
 	}
 
 	$scope.rotateCCW = function() {
-		while($scope.cols() < $scope.rows()) {
-			$scope.extendHorizontally();
-		}
-
-		while($scope.cols() > $scope.rows()) {
-			$scope.extendVertically();
-		}
-
 		var i, j;
 		var newData = [];
 
