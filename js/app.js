@@ -1,7 +1,7 @@
 var qfortEditr = angular.module('qfortEditr', []);
 
 qfortEditr.controller('DataCtrl', function($scope) {
-	$scope.data = [['', 'd'], ['d', '']];
+	$scope.data = [['']];
 
 	$scope.rows = function() {
 		return $scope.data.length;
